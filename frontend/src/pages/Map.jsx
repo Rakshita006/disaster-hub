@@ -34,7 +34,7 @@ const Map = () => {
   const handleStatusUpdate = async (postId, newStatus) => {
     try {
       const res = await axios.patch(
-        `http://localhost:5000/api/post/${postId}/status`,
+        `${import.meta.env.VITE_API_URL}/api/post/${postId}/status`,
         { status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } },
       );
@@ -56,7 +56,7 @@ const Map = () => {
       const { latitude, longitude } = position.coords;
       setUserLocation([latitude, longitude]);
 
-      const res = await axios.get("http://localhost:5000/api/post", {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/posts`, {
         params: { lat: latitude, lng: longitude, radius: 50000 },
       });
       setPosts(Array.isArray(res.data) ? res.data : []);
@@ -64,7 +64,7 @@ const Map = () => {
   }, []);
 
   useEffect(() => {
-    const socket = io("http://localhost:5000");
+    const socket = io(`${import.meta.env.VITE_API_URL}`);
 
     socket.on("connect", () => {
       console.log("Connected to socket");
@@ -109,7 +109,7 @@ const Map = () => {
   const handleSendMessage = async (text) => {
     try {
       await axios.post(
-        `http://localhost:5000/api/post/${chatPost._id}/messages`,
+        `${import.meta.env.VITE_API_URL}/api/post/${chatPost._id}/messages`,
         { text },
         { headers: { Authorization: `Bearer ${token}` } },
       );
