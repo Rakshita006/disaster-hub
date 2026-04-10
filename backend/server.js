@@ -14,7 +14,7 @@ const httpServer=http.createServer(app)
 
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://disaster-hub-backend.onrender.com'
+  'https://disaster-hub-inky.vercel.app'
 ];
 
 const io=new Server(httpServer,{
