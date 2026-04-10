@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+.marker-red {
+  filter: hue-rotate(0deg) saturate(3);
+}
+
+.marker-green {
+  filter: hue-rotate(100deg) saturate(3);
+}
