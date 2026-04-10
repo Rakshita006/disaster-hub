@@ -12,14 +12,23 @@ dotenv.config()
 const app=express()
 const httpServer=http.createServer(app)
 
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://disaster-hub-backend.onrender.com'
+];
+
 const io=new Server(httpServer,{
   cors:{
-    origin:'http://localhost:5173',
+    origin:allowedOrigins,
     methods: ['GET', 'POST']
   }
 })
 
-app.use(cors())
+app.use(cors({
+  origin: allowedOrigins,
+  methods: ['GET', 'POST', 'PATCH']
+}));
+
 app.use(express.json())
 
 app.use((req,res,next)=>{
